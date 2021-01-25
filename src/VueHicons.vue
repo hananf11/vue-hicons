@@ -9,7 +9,6 @@
     :stroke-linejoin="strokeLinejoin"
     @click="$emit('click')"
   >
-
     <path
       :d="icon.path1"
       :fill-rule="fillRuleBasicPath"
@@ -23,18 +22,16 @@
       :clip-rule="clipRuleTwoPath"
     />
 
-    <path
-      v-if="isTriplePath"
-      :d="icon.path3"
-    />
+    <path v-if="isTriplePath" :d="icon.path3" />
   </svg>
 </template>
 
 <script>
 import './assets/css/tailwind.css';
 import icons from './assets/icons.json';
+import { defineComponent } from 'vue-demi';
 
-export default {
+export default defineComponent({
   name: "VueHicons",
 
   props: {
@@ -114,7 +111,7 @@ export default {
     }
   },
 
-  data:() => ({
+  data: () => ({
     doublePath: false,
     isTriplePath: false,
     icon: {
@@ -180,7 +177,7 @@ export default {
       return this.name.split("_").join("-");
     },
 
-    classIconFinal () {
+    classIconFinal() {
       return this.heightIcon == 4
         ? `${this.iconNameClass} ${this.classIcon} w-${this.widthIcon}`
         : `${this.iconNameClass} ${this.classIcon} w-${this.widthIcon} h-${this.heightIcon}`;
@@ -245,7 +242,7 @@ export default {
     buildIcon() {
       const iconName = this.name;
 
-      if(!this.isFilled)
+      if (!this.isFilled)
         this.buildNoFilledIcon(iconName);
       else
         this.buildFileldIcon(iconName);
@@ -259,7 +256,7 @@ export default {
     },
 
     buildFileldIcon(name) {
-      if(this.filledIconsWithTriplePaths.includes(name)) {
+      if (this.filledIconsWithTriplePaths.includes(name)) {
         this.buildIconTriplePathFilled();
 
         return;
@@ -353,7 +350,7 @@ export default {
       this.icon.path3 = temporalJSONWithDoblePath.path3;
     }
   }
-};
+});
 
 // ".*-.*": REGEX TO SEARCH ANY -
 </script>
